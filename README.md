@@ -67,6 +67,45 @@ uvicorn app.main:app --reload
 - Health check: http://127.0.0.1:8000/health
 - Interactive docs: http://127.0.0.1:8000/docs
 
+
+## Docker
+
+### Build the image
+
+Run from the project root:
+
+```bash
+docker build -t lms-backend .
+```
+
+### Run the container
+
+Provide your database configuration through environment variables:
+
+```bash
+docker run -d \
+  --name lms-container \
+  -p 8000:8000 \
+  --env-file backend/.env \
+  lms-backend
+```
+
+### Access the API
+
+- Health: http://localhost:8000/health
+- API documentation: http://localhost:8000/docs
+
+### Stop the container
+
+```bash
+docker stop lms-container
+docker rm lms-container
+```
+
+Note: The current application lifecycle drops registered
+database tables during shutdown.
+
+
 ## Notes
 
 - On startup, the app creates any missing tables with `Base.metadata.create_all`.
