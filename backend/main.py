@@ -11,6 +11,8 @@ async def lifespan(app: FastAPI):
     # Startup: verify the database connection
     async with engine.connect() as conn:
         await conn.execute(text("SELECT 1"))
+        result = await conn.execute(text("SELECT 1"))
+        print("Database says:", result.scalar())
     yield
     # Shutdown: close the connection pool
     await engine.dispose()
