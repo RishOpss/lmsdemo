@@ -15,9 +15,7 @@ async def lifespan(app: FastAPI):
     # Shutdown: close the connection pool
     await engine.dispose()
 
-
 app = FastAPI(title="LMS API", lifespan=lifespan)
-
 
 @app.get("/health")
 async def health():
