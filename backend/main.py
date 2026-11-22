@@ -2,7 +2,7 @@ from contextlib import asynccontextmanager
 
 from fastapi import FastAPI
 from sqlalchemy import text
-
+import app.models  # noqa: F401 (load every model)
 from app.db.session import engine
 
 
