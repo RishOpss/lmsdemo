@@ -21,9 +21,24 @@ class Handler(SimpleHTTPRequestHandler):
             return self.proxy()
         super().do_GET()
 
+    def end_headers(self):
+        self.send_header("Cache-Control", "no-store")  # dev server: always serve fresh files
+        super().end_headers()
+
+    def do_POST(self):
+        if self.path.startswith("/api/"):
+            return self.proxy()
+        self.send_error(405)
+
     def proxy(self):
         try:
-            with urllib.request.urlopen(BACKEND + self.path, timeout=10) as r:
+            length = int(self.headers.get("Content-Length") or 0)
+            data = self.rfile.read(length) if length else None
+            req = urllib.request.Request(
+                BACKEND + self.path, data=data, method=self.command,
+                headers={"Content-Type": self.headers.get("Content-Type", "application/json")},
+            )
+            with urllib.request.urlopen(req, timeout=10) as r:
                 body, status, ctype = r.read(), r.status, r.headers.get("Content-Type")
         except urllib.error.HTTPError as e:
             body, status, ctype = e.read(), e.code, e.headers.get("Content-Type")

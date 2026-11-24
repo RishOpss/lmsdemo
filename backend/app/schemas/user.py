@@ -2,6 +2,9 @@ from datetime import datetime
 
 from pydantic import BaseModel, ConfigDict, Field
 
+class LoginRequest(BaseModel):
+    email: str
+    password: str
 
 class UserCreate(BaseModel):
     username: str = Field(min_length=3, max_length=50)
