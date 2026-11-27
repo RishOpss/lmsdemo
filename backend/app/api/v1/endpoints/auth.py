@@ -13,6 +13,9 @@ router = APIRouter()
 async def login(data: LoginRequest, session: AsyncSession = Depends(get_session)):
     result = await session.execute(select(User).where(User.email == data.email))
     user = result.scalar_one_or_none()
-    if not user or not verify_password(data.password, user.password_hash):
-        raise HTTPException(status_code=401, detail="Invalid email or password")
+    if not user or user.password_hash != data.password:
+        raise HTTPException(
+        status_code=401,
+        detail="Invalid credentials"
+        )
     return user

@@ -25,7 +25,7 @@ async def create_user(
         username=user.username,
         email=user.email,
         phone_number=user.phone_number,
-        password_hash=hash_password(user.password),
+        password_hash=user.password,
         role=user.role
     )
 
