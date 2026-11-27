@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LMS – Learn something new</title>
+  <link rel="stylesheet" href="css/style.css" />
+  <link rel="stylesheet" href="css/home.css" />
+</head>
+<body>
+  <header class="nav">
+    <a class="brand" href="/">📚 LMS</a>
+    <div class="auth" id="auth">
+      <button id="open-signin" class="btn ghost" type="button">Sign in</button>
+      <button id="open-signup" class="btn" type="button">Sign up</button>
+    </div>
+  </header>
+
+  <section class="hero">
+    <h1>Learn without limits</h1>
+    <p>Pick a course and start building new skills today.</p>
+  </section>
+
+  <main class="home">
+    <div class="tabs" role="tablist" id="tabs"></div>
+    <div class="grid" id="courses" role="tabpanel"></div>
+  </main>
+
+  <dialog id="signup">
+    <form method="dialog" id="signup-form">
+      <h2>Create your account</h2>
+      <label>Username<input name="username" required minlength="3" maxlength="50" autocomplete="username" /></label>
+      <label>Email<input name="email" type="email" required maxlength="100" autocomplete="email" /></label>
+      <label>Phone<input name="phone_number" type="tel" required maxlength="15" autocomplete="tel" /></label>
+      <label>Password<input name="password" type="password" required minlength="8" maxlength="128" autocomplete="new-password" /></label>
+      <label>I am a
+        <select name="role"><option value="student">Student</option><option value="instructor">Instructor</option><option value="admin">Admin</option></select>
+      </label>
+      <p class="msg" id="signup-msg" role="status"></p>
+      <div class="actions"><button type="button" class="btn ghost" data-close>Cancel</button><button class="btn" type="submit">Sign up</button></div>
+    </form>
+  </dialog>
+
+  <dialog id="signin">
+    <form method="dialog" id="signin-form">
+      <h2>Welcome back</h2>
+      <label>Email<input name="email" type="email" required autocomplete="email" /></label>
+      <label>Password<input name="password" type="password" required autocomplete="current-password" /></label>
+      <p class="msg" id="signin-msg" role="status"></p>
+      <div class="actions"><button type="button" class="btn ghost" data-close>Cancel</button><button class="btn" type="submit">Sign in</button></div>
+    </form>
+  </dialog>
+
+  <script src="js/session.js"></script>
+  <script src="js/home.js"></script>
+</body>
+</html>

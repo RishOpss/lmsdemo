@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>LMS – Users</title>
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body>
+  <header class="topbar">
+    <h1>LMS Users</h1>
+    <button id="refresh" type="button">Refresh</button>
+  </header>
+
+  <main>
+    <div class="controls">
+      <input id="search" type="search" placeholder="Search username, email, phone…" aria-label="Search users" />
+      <select id="role" aria-label="Filter by role">
+        <option value="">All roles</option>
+        <option value="admin">Admin</option>
+        <option value="instructor">Instructor</option>
+        <option value="student">Student</option>
+      </select>
+      <span id="count" class="count"></span>
+    </div>
+
+    <div id="status" class="status" role="status"></div>
+
+    <div class="table-wrap">
+      <table id="users-table" hidden>
+        <thead>
+          <tr>
+            <th data-key="id">ID</th>
+            <th data-key="username">Username</th>
+            <th data-key="email">Email</th>
+            <th data-key="phone_number">Phone</th>
+            <th data-key="role">Role</th>
+            <th data-key="created_at">Created</th>
+          </tr>
+        </thead>
+        <tbody id="users-body"></tbody>
+      </table>
+    </div>
+  </main>
+
+  <script src="js/users.js"></script>
+</body>
+</html>
