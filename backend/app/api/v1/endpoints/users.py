@@ -20,6 +20,7 @@ async def create_user(
     user: UserCreate,
     session: AsyncSession = Depends(get_session)
 ):
+
     new_user = User(
         username=user.username,
         email=user.email,
@@ -29,7 +30,18 @@ async def create_user(
     )
 
     session.add(new_user)
-    await session.commit()
+
+    try:
+        await session.commit()
+
+    except IntegrityError:
+        await session.rollback()
+
+        raise HTTPException(
+            status_code=409,
+            detail="User data conflicts with existing records"
+        )
+
     await session.refresh(new_user)
 
-    return UserRead.model_validate(new_user)
+    return new_user
